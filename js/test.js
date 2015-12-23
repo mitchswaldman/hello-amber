@@ -26,7 +26,15 @@
 					"But I'm just kidding:",
 					"I can always be there!",
 					"Scroll down!"];
-	_.map(phrases, function(phrase){
+	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
-	})
+	});
+
+	var tl = new TimelineLite, 
+    mySplitText = new SplitText("#quote", {type:"words,chars"}), 
+    chars = mySplitText.chars; //an array of all the divs that wrap each character
+
+	TweenLite.set("#quote", {perspective:400});
+
+	tl.staggerFrom(chars, 0.8, {opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 50% -50",  ease:Back.easeOut}, 0.01, "e0");
 }())
