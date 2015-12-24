@@ -31,7 +31,7 @@
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
 	});
-
+	
 	
 	var appendQuoteDivs = function(phrases){
 		_.each(phrases, function(phrase){
