@@ -1,5 +1,7 @@
 (function(){
-	var duration = 2000;
+	var width = window.innerWidth,
+	    height = window.innerHeight;
+	var duration = 2;
 	var phrases = ["Hello, Amber.",
 					"This is Mitch speaking.",
 					"Well, not quite \"Mitch\",",
@@ -30,11 +32,32 @@
 		return new TextModel(phrase, duration);
 	});
 
-	var tl = new TimelineLite, 
-    mySplitText = new SplitText("#quote", {type:"words,chars"}), 
-    chars = mySplitText.chars; //an array of all the divs that wrap each character
+	
+	var appendQuoteDivs = function(phrases){
+		_.each(phrases, function(phrase){
+			$('body').append('<div class="quote" style="opacity:0">'+phrase+'</div>')
+		})
+	};
+	appendQuoteDivs(phrases);
+	var $quotes = $(".quote");
+	// var tl = new TimelineLite({paused:true}), 
+ //    mySplitText = new SplitText($quotes, {type:"chars"}), 
+ //    chars = mySplitText.chars; //an array of all the divs that wrap each character
+    TweenMax.staggerTo($quotes, .5, {opacity: 1, x: width/2, y:height/2, rotationX: 360, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:2, yoyo: true}, 2.5)
+	// TweenLite.set($quotes, {perspective:400});
+ //    _.each($quotes, function($quote){
 
-	TweenLite.set("#quote", {perspective:400});
-
-	tl.staggerFrom(chars, 0.8, {opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 50% -50",  ease:Back.easeOut}, 0.01, "e0");
+ //    });
+	// _.each(textModels, function(textModel){
+	// 	mySplitText.revert();
+	// 	$quote.text(textModel.phrase);
+	// 	mySplitText = new SplitText($quote, {type:"words, chars"});
+	// 	chars = mySplitText.chars;
+	// 	tl.staggerFrom(chars, textModel.duration, {opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 50% -50",  ease:Back.easeOut}, 0.01, "e0");	
+	// });
+	//What are the steps for this?
+	//1. Revert
+	//2. Set innerHTML to next quote
+	//3. get the chars
+	//4. set the timeline again
 }())
