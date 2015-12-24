@@ -35,7 +35,8 @@
 	
 	var appendQuoteDivs = function(phrases){
 		_.each(phrases, function(phrase){
-			$('body').append('<div class="quote" style="opacity:0">'+phrase+'</div>')
+			var divString = '<div class="quote" style="opacity:1; top:'+height/3+';">'+phrase+'</div>';
+			$('body').append(divString);
 		})
 	};
 	appendQuoteDivs(phrases);
@@ -43,7 +44,7 @@
 	// var tl = new TimelineLite({paused:true}), 
  //    mySplitText = new SplitText($quotes, {type:"chars"}), 
  //    chars = mySplitText.chars; //an array of all the divs that wrap each character
-    TweenMax.staggerTo($quotes, .5, {opacity: 1, x: width/2, y:height/2, rotationX: 360, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:2, yoyo: true}, 2.5)
+    TweenMax.staggerFrom($quotes, .5, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:2, yoyo: true}, 3.0)
 	// TweenLite.set($quotes, {perspective:400});
  //    _.each($quotes, function($quote){
 
