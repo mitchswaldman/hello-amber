@@ -1,7 +1,8 @@
 (function(){
 	var width = window.innerWidth,
 	    height = window.innerHeight;
-	var duration = 2;
+	var duration = 3;
+	var rollInSpeed = .5;
 	var phrases = ["Hello, Amber.",
 					"This is Mitch speaking.",
 					"Well, not quite \"Mitch\",",
@@ -31,7 +32,7 @@
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
 	});
-	
+
 	
 	var appendQuoteDivs = function(phrases){
 		_.each(phrases, function(phrase){
@@ -41,10 +42,16 @@
 	};
 	appendQuoteDivs(phrases);
 	var $quotes = $(".quote");
+	TweenMax.staggerFrom($quotes, //object
+		rollInSpeed, //duration
+		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:duration, yoyo: true}, //vars
+		rollInSpeed*2 + duration); //staggerwait
+
+
 	// var tl = new TimelineLite({paused:true}), 
  //    mySplitText = new SplitText($quotes, {type:"chars"}), 
  //    chars = mySplitText.chars; //an array of all the divs that wrap each character
-    TweenMax.staggerFrom($quotes, .5, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:2, yoyo: true}, 3.0)
+    
 	// TweenLite.set($quotes, {perspective:400});
  //    _.each($quotes, function($quote){
 
