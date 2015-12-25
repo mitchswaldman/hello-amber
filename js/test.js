@@ -1,52 +1,44 @@
 (function(){
+	var audio = new Audio('assets/in_my_life.mp3');
+	
 	var width = window.innerWidth,
 	    height = window.innerHeight;
 	var duration = 3;
 	var rollInSpeed = .5;
 	var phrases = ["Hello, Amber.",
-					"This is Mitch speaking.",
-					"Well, not quite \"Mitch\",",
-					"More, like, \"Mitch's heart\".",
-					"Because unlike me,",
-					"My heart will always be here,",
-					"right here, actually,",
-					"right at this web address.",
-					"Why? Well,",
-					"I won't always be able",
-					"to say \"I love you,\"",
-					"or sing nonsense to you,",
-					"or pet puppy dogs with you,",
-					"because, sadly, I won't be there.",
-					"There's a big adventure ahead,",
-					"but it's for you.",
-					"And though I can't go,",
-					"I can write this love letter",
-					"that can't be lost,",
-					"that can't be forgotten,",
-					"that uses little cellular data,",
-					"that you can always read.",
-					"I love you, Amber.",
-					"But I'm just kidding:",
-					"I can always be there!",
-					"Scroll down!"];
+					"This is a love letter.",
+					"An e-love letter.",
+					"Soon, you'll start an adventure.",
+					"One that I can't be apart of.",
+					"So, I wanted to create a place",
+					"that you can always get to,",
+					"no matter where you are,",
+					"a place to jog your memory.",
+					"Let the feelings commence!"];
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
 	});
 
-	
+	function playSong(){
+		audio.play();
+	};
+
 	var appendQuoteDivs = function(phrases){
 		_.each(phrases, function(phrase){
-			var divString = '<div class="quote" style="opacity:1; top:'+height/3+';">'+phrase+'</div>';
+			var divString = '<div class="quote" style="opacity:0; top:'+height/3+';">'+phrase+'</div>';
 			$('body').append(divString);
 		})
 	};
 	appendQuoteDivs(phrases);
 	var $quotes = $(".quote");
-	TweenMax.staggerFrom($quotes, //object
+	TweenMax.staggerFromTo($quotes, //object
 		rollInSpeed, //duration
 		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:duration, yoyo: true}, //vars
-		rollInSpeed*2 + duration); //staggerwait
+		{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:duration, yoyo: true},
+		rollInSpeed*2 + duration,
+		playSong); //staggerwait
 
+	
 
 	// var tl = new TimelineLite({paused:true}), 
  //    mySplitText = new SplitText($quotes, {type:"chars"}), 
