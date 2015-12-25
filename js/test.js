@@ -1,5 +1,8 @@
 (function(){
-	var audio = new Audio('assets/in_my_life.mp3');
+	var audio = new Howl({
+		urls: ['assets/in_my_life.mp3'],
+		onPlay: beginSlideShow
+	});
 	
 	var width = window.innerWidth,
 	    height = window.innerHeight;
@@ -9,7 +12,7 @@
 					"This is a love letter.",
 					"An e-love letter.",
 					"Soon, you'll start an adventure.",
-					"One that I can't be apart of.",
+					"One that I can't be a part of.",
 					"So, I wanted to create a place",
 					"that you can always get to,",
 					"no matter where you are,",
@@ -18,6 +21,16 @@
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
 	});
+
+	var tl = new TimelineLite({paused:true});
+	
+	function beginSlideShow(){
+
+	}
+
+	function showReplayButton(){
+
+	}
 
 	function playSong(){
 		audio.play();
@@ -30,7 +43,9 @@
 		})
 	};
 	appendQuoteDivs(phrases);
+
 	var $quotes = $(".quote");
+
 	TweenMax.staggerFromTo($quotes, //object
 		rollInSpeed, //duration
 		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:duration, yoyo: true}, //vars
