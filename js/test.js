@@ -11,6 +11,8 @@
 	var duration = 3;
 	var memoryDuration = 5;
 	var rollInSpeed = .5;
+	var shapeMorphTime = .5;
+	var shapeHoldTime = "+="+ (memoryDuration);
 	var phrases = ["Hello, Amber.",
 					// "This is a love letter.",
 					// "An e-love letter.",
@@ -24,7 +26,24 @@
 
 	var memories = ["First Date",
 					"The apartment",
-					"Forts"];
+					"Forts",
+					"Watching the blood moon",
+					"Dancing to Mickey and Sylvia",
+					"Europe",
+					"Venice",
+					"Train rides in Germany",
+					"The elevator in Amsterdam",
+					"Hot trash in New York",
+					"Flying with Jason",
+					"Star Wars",
+					"Camping out for First City",
+					"Late-night McDonald's",
+					"Walking Otter",
+					"Bird watching at the reservation",
+					"Magic Mountain",
+					"Fallout 4",
+					"Watching our shows",
+					"I love you, Amber"];
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
 	});
@@ -33,23 +52,61 @@
 	var tl = new TimelineLite({paused:true});
 	
 
+	//NOTE: Put the name of the next shape in the morphSVG item.
+	function addFirstDate(tl){
+		return tl.addLabel("firstDate", 1)
+		.to("#start", shapeMorphTime, {morphSVG: "#apartment"}, "firstDate"+ shapeHoldTime)
+		.fromTo("#start1", shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"firstDate")
+		.fromTo("#start2", shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"firstDate");
+	}
+
+	function addApartment(tl) {
+		var rooftopBuffer = .5;
+		return tl.addLabel("apartment", "firstDate"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#fort"}, "apartment"+shapeHoldTime)
+			     .fromTo("#doorknob",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"apartment+=.5")
+			     .fromTo(".roof",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"apartment+="+rooftopBuffer);
+	}
+
+	function addFort(tl){
+
+		return tl.addLabel("fort", "apartment"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#end"}, "fort"+shapeHoldTime)
+			     .fromTo("#hook",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"fort")
+			     .fromTo(".chair",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime , yoyo: true},
+									"fort")
+			     .fromTo(".tv",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime , yoyo: true},
+									"fort");
+	}
 	function beginSlideShow(){
-		var shapeMorphTime = .5;
-		var shapeHoldTime = "+="+ (memoryDuration - shapeMorphTime);
+		
 		var tl = new TimelineLite();
 		tl.delay(11);
 		tl.staggerFromTo($memories, //object
 									rollInSpeed, //duration of animation
 									{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 2 *rollInSpeed, yoyo: true}, //vars
 									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 2 *rollInSpeed, yoyo: true},
-									memoryDuration,
-									showReplayButton) //staggerwait
+									memoryDuration, //stagger wait
+									showReplayButton); 
 
 		var artTimeLine = new TimelineLite();
 		artTimeLine.delay(10);
-		artTimeLine.to("#svgContainer", 1, {opacity: 1})
-		.to("#start", shapeMorphTime, {morphSVG: "#end"}, shapeHoldTime)
-		.to("#start", shapeMorphTime, {morphSVG: "#shape"}, shapeHoldTime);
+		artTimeLine.to("#svgContainer", 1, {opacity: 1});
+		addFirstDate(artTimeLine);
+		addApartment(artTimeLine);
+		addFort(artTimeLine);
 	}
 
 	function showReplayButton(){
