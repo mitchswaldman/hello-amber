@@ -29,7 +29,6 @@
 					"Forts",
 					"Watching the blood moon",
 					"Dancing to Mickey and Sylvia",
-					"Europe",
 					"Venice",
 					"Train rides in Germany",
 					"The elevator in Amsterdam",
@@ -79,7 +78,7 @@
 	function addFort(tl){
 
 		return tl.addLabel("fort", "apartment"+shapeHoldTime)
-			     .to("#start", shapeMorphTime, {morphSVG: "#end"}, "fort"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#moon"}, "fort"+shapeHoldTime)
 			     .fromTo("#hook",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
 									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
 									"fort")
@@ -90,6 +89,35 @@
 									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime , yoyo: true},
 									"fort");
 	}
+
+	function addMoon(tl) {
+		return tl.addLabel("moon", "fort"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#dancing"}, "moon"+shapeHoldTime)
+			     .fromTo(".crater",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 0% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime , yoyo: true},
+									"moon")
+			     .fromTo(".moon_head",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime , yoyo: true},
+									"moon");
+	}
+
+	function addDancing(tl) {
+		return tl.addLabel("dancing", "moon"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#venice"}, "dancing"+shapeHoldTime)
+	}
+
+	function addVenice(tl){
+		var rooftopBuffer = .5;
+		return tl.addLabel("venice", "dancing"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#end"}, "venice"+shapeHoldTime)
+			     .fromTo(".detail",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"venice+=.5")
+			     .fromTo(".water",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"venice+="+rooftopBuffer);
+	}
+
 	function beginSlideShow(){
 		
 		var tl = new TimelineLite();
@@ -107,6 +135,9 @@
 		addFirstDate(artTimeLine);
 		addApartment(artTimeLine);
 		addFort(artTimeLine);
+		addMoon(artTimeLine);
+		addDancing(artTimeLine);
+		addVenice(artTimeLine);
 	}
 
 	function showReplayButton(){
