@@ -32,14 +32,26 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-
-	/*svg {
+	.memory {
+		position: absolute;
+		font-family: 'Poiret One', cursive;
+		font-size: 250%;
+		color: #96281B;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 90px;
+		left:0;
+		right:0;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#svgContainer {
 		position: absolute;
 		left: 0;
 		right: 0;
 		margin-left: auto;
 		margin-right: auto;
-	}*/
+	}
 
 	path{
 		stroke: #96281B;
@@ -53,22 +65,27 @@
 		stroke: #96281B;
 	}
 
-	#end {
+	#end, #shape, #box {
 		visibility: hidden;
 	}
 </style>
 </head>
 <body>
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<div id="svgContainer">
+	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;stroke-width:6;stroke-miterlimit:10;}
 </style>
-<rect class="st0" width="400" height="400"/>
+<rect id="box" class="st0" width="400" height="400"/>
 <path id="start" class="st0" d="M73.8,105c97.3-23.6,218.7,8.2,239,90.7c20.3,82.4-84.1-83-176.9-56.6s106.6,37.7,93.4,79.8
 	s-48.4-44.7-104.4-28.7s48.4,18.1,44,31.9c-4.4,13.7-53.3-9.9-61,11"/>
 <circle id="end" class="st0" cx="191.6" cy="183" r="126.4"/>
+<path id="shape" class="st0" d="M118,220.3c17.6-35.7,23.1-108.2-33-112.6c-56-4.4-51.6-33-34.6-56.6s41.3-44,79.7,8.8
+	s46.1,26.9,63.1,26.9s17.6,8.2,36.3,8.2s42.3-23.6,53.8-39s30.2-31.3,53.3-13.2c23.1,18.1,41.2,50,0,67s-46.7-1.9-64.8,13.6
+	s14.8,90.8,14.8,90.8s8.2,69.2-89,69.8C100.4,284.6,118,220.3,118,220.3z"/>
 </svg>
+</div>
 <script src="js/textModel.js" type="text/javascript"></script>
 <script src="js/test.js" type="text/javascript"></script>
 </body>
