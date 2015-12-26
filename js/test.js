@@ -21,9 +21,10 @@
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
 	});
-
+	$("svg").attr('width', Math.min(width, height)/4);
+	$("svg").attr('height', Math.min(width, height)/4);
 	var tl = new TimelineLite({paused:true});
-	
+	TweenMax.to("#start", 5, {morphSVG: "#end"});
 	function beginSlideShow(){
 
 	}
