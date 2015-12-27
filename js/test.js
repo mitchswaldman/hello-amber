@@ -1,4 +1,4 @@
-(function(){
+$(function(){
 	var audio = new Howl({
 		urls: ['assets/in_my_life.mp3'],
 		onplay: function(){
@@ -9,7 +9,7 @@
 	var width = window.innerWidth,
 	    height = window.innerHeight;
 	var duration = 3;
-	var memoryDuration = 5;
+	var memoryDuration = 9;
 	var rollInSpeed = .5;
 	var shapeMorphTime = .5;
 	var shapeHoldTime = "+="+ (memoryDuration);
@@ -36,12 +36,7 @@
 					"Flying with Jason",
 					"Star Wars",
 					"Camping out for First City",
-					"Late-night McDonald's",
-					"Walking Otter",
-					"Bird watching at the reservation",
-					"Magic Mountain",
 					"Fallout 4",
-					"Watching our shows",
 					"I love you, Amber"];
 	var textModels = _.map(phrases, function(phrase){
 		return new TextModel(phrase, duration);
@@ -109,13 +104,86 @@
 	function addVenice(tl){
 		var rooftopBuffer = .5;
 		return tl.addLabel("venice", "dancing"+shapeHoldTime)
-			     .to("#start", shapeMorphTime, {morphSVG: "#end"}, "venice"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#train"}, "venice"+shapeHoldTime)
 			     .fromTo(".detail",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
 									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
-									"venice+=.5")
+									"venice")
 			     .fromTo(".water",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
 									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
 									"venice+="+rooftopBuffer);
+	}
+
+	function addTrain(tl) {
+		var rooftopBuffer = .5;
+		return tl.addLabel("train", "venice"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#elevator"}, "train"+shapeHoldTime)
+			     .fromTo(".train_detail",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 0% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"train")
+			     .fromTo(".train_water",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"train+="+rooftopBuffer);
+	}
+
+	function addElevator(tl) {
+		var rooftopBuffer = .5;
+		return tl.addLabel("elevator", "train"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#trash"}, "elevator"+shapeHoldTime)
+			     .fromTo(".e_detail",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 0% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"elevator");
+	}
+
+	function addTrash(tl) {
+		return tl.addLabel("trash", "elevator"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#plane"}, "trash"+shapeHoldTime)
+			     .fromTo(".trash_detail",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 0% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"trash");
+	}
+
+	function addPlane(tl){
+		var rooftopBuffer = .5;
+		return tl.addLabel("plane", "trash"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#death_star"}, "plane"+shapeHoldTime)
+			     .fromTo(".plane_detail",shapeMorphTime, {opacity: 0, rotationX: 90, transformOrigin: "0% 0% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime, yoyo: true},
+									"plane")
+			     .fromTo(".wind",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"plane+="+rooftopBuffer);
+	}
+
+	function addDeathStar(tl){
+		var rooftopBuffer = .5;
+		return tl.addLabel("death_star", "plane"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#camping"}, "death_star"+shapeHoldTime)
+			     .fromTo(".ds_detail",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"death_star+="+rooftopBuffer);
+	}
+
+	function addCamping(tl){
+		var rooftopBuffer = .5;
+		return tl.addLabel("camping", "death_star"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#dogmeat"}, "camping"+shapeHoldTime)
+			     .fromTo(".c_details",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"camping+="+rooftopBuffer);
+	}
+
+	function addDogmeat(tl){
+		var rooftopBuffer = .5;
+		return tl.addLabel("dogmeat", "camping"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {morphSVG: "#heart"}, "dogmeat"+shapeHoldTime)
+			     .fromTo(".dm_details",shapeMorphTime, {opacity: 0, rotationX: 90, rotationY: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true}, //vars
+									{opacity: 1, rotationX: 0, rotationY: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:memoryDuration - 3 *shapeMorphTime - rooftopBuffer, yoyo: true},
+									"dogmeat+="+rooftopBuffer);
+	}
+
+	function addHeart(tl){
+		return tl.addLabel("heart", "dogmeat"+shapeHoldTime)
+			     .to("#start", shapeMorphTime, {opacity: 0}, "heart"+shapeHoldTime)
 	}
 
 	function beginSlideShow(){
@@ -138,6 +206,14 @@
 		addMoon(artTimeLine);
 		addDancing(artTimeLine);
 		addVenice(artTimeLine);
+		addTrain(artTimeLine);
+		addElevator(artTimeLine);
+		addTrash(artTimeLine);
+		addPlane(artTimeLine);
+		addDeathStar(artTimeLine);
+		addCamping(artTimeLine);
+		addDogmeat(artTimeLine);
+		addHeart(artTimeLine);
 	}
 
 	function showReplayButton(){
@@ -172,10 +248,37 @@
 	var $quotes = $(".quote");
 	var $memories = $(".memory");
 
-	TweenMax.staggerFromTo($quotes, //object
-		rollInSpeed, //duration
-		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:duration, yoyo: true}, //vars
-		{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:duration, yoyo: true},
-		rollInSpeed*2 + duration,
-		playSong); //staggerwait
+	document.body.addEventListener('touchend', function(e){
+        $("#banner").css("display", "none"); 
+        beginPoem();
+        TweenMax.fromTo('#banner',
+		rollInSpeed,
+		{opacity: 1, rotationX: 0, ease:Expo.easeOut},
+		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut});
+    }, false);
+
+    document.body.onclick = function(e){
+    	$("#banner").css("display", "none"); 
+        beginPoem();
+        TweenMax.fromTo('#banner',
+		rollInSpeed,
+		{opacity: 1, rotationX: 0, ease:Expo.easeOut},
+		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut});
+    }
+
+    var divString = '<div id="banner" style="opacity:0; top:'+height/3+';"> Touch to Begin </div>';
+	$('body').append(divString);
+	TweenMax.fromTo('#banner',
+		rollInSpeed,
+		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut},
+		{opacity: 1, rotationX: 0, ease:Expo.easeOut});
+
+	function beginPoem(){
+		TweenMax.staggerFromTo($quotes, //object
+			rollInSpeed, //duration
+			{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut, repeat: 1, repeatDelay:duration, yoyo: true}, //vars
+			{opacity: 1, rotationX: 0, ease:Expo.easeOut,  repeat: 1, repeatDelay:duration, yoyo: true},
+			rollInSpeed*2 + duration,
+			playSong); //staggerwait
+	}
 }())
