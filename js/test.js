@@ -5,7 +5,7 @@ $(function(){
 			beginSlideShow();
 		}
 	});
-	
+	var touched = false;
 	var width = window.innerWidth,
 	    height = window.innerHeight;
 	var duration = 3;
@@ -249,21 +249,27 @@ $(function(){
 	var $memories = $(".memory");
 
 	document.body.addEventListener('touchend', function(e){
-        $("#banner").css("display", "none"); 
-        beginPoem();
-        TweenMax.fromTo('#banner',
-		rollInSpeed,
-		{opacity: 1, rotationX: 0, ease:Expo.easeOut},
-		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut});
+		if(!touched){
+	        $("#banner").css("display", "none"); 
+	        beginPoem();
+	        TweenMax.fromTo('#banner',
+			rollInSpeed,
+			{opacity: 1, rotationX: 0, ease:Expo.easeOut},
+			{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut});
+			touched = true;
+    	}
     }, false);
 
     document.body.onclick = function(e){
-    	$("#banner").css("display", "none"); 
-        beginPoem();
-        TweenMax.fromTo('#banner',
-		rollInSpeed,
-		{opacity: 1, rotationX: 0, ease:Expo.easeOut},
-		{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut});
+    	if(!touched){
+	        $("#banner").css("display", "none"); 
+	        beginPoem();
+	        TweenMax.fromTo('#banner',
+			rollInSpeed,
+			{opacity: 1, rotationX: 0, ease:Expo.easeOut},
+			{opacity: 0, rotationX: 90, transformOrigin: "0% 100% -50", ease:Expo.easeOut});
+			touched = true;
+    	}
     }
 
     var divString = '<div id="banner" style="opacity:0; top:'+height/3+';"> Touch to Begin </div>';
