@@ -9,19 +9,19 @@ $(function(){
 	var width = window.innerWidth,
 	    height = window.innerHeight;
 	var duration = 3;
-	var memoryDuration = 3;
+	var memoryDuration = 9;
 	var rollInSpeed = .5;
 	var shapeMorphTime = .5;
 	var shapeHoldTime = "+="+ (memoryDuration);
 	var phrases = ["Hello, Amber.",
-					// "This is a love letter.",
-					// "An e-love letter.",
-					// "Soon, you'll start an adventure.",
-					// "One that I can't be a part of.",
-					// "So, I wanted to create a place",
-					// "that you can always get to,",
-					// "no matter where you are,",
-					// "a place to jog your memory.",
+					"This is a love letter.",
+					"An e-love letter.",
+					"Soon, you'll start an adventure.",
+					"One that I can't be a part of.",
+					"So, I wanted to create a place",
+					"that you can always get to,",
+					"no matter where you are,",
+					"a place to jog your memory.",
 					"Let the feelings commence!"];
 
 	var memories = ["First Date",
