@@ -39,7 +39,7 @@ $(function(){
 					"I hope this message finds you happy and well,",
 					"And I hope life has been as good to you as you are to it.",
 					"I will always love you.", 
-					"I'm sorry that I didn't show that all the time.",
+					"I'm sorry that I didn't show it all the time.",
 					"Now back to our regular scheduled programming..."];
 
 	var memories = ["First Date",
